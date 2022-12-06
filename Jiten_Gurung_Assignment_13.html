@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 13 Homework</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//----------------//
+// Big O notation //
+//----------------//
+console.log("Big O notation");
+
+// 1. What is the worst case complexity of the following function?
+
+function hasDuplicates(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length; j++) {
+      if (i !== j && arr[i] === arr[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+// Worst case - There is no duplicates and there is a for loop inside the for loop, 
+// in which case both the for loops runs till the last number. 
+// worst case complexity - O(n^2)
+
+// 2. Implement a faster version of the same function and analyze the
+//    complexity of this approach.
+
+function hasDuplicatesFast(arr) {
+  array.sort(); 
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i-1] === arr[i]) {
+      return true;
+    }
+  }
+  return false;
+} 
+
+//----------------------------//
+// Having fun with algorithms //
+//----------------------------//
+console.log("Having fun with algorithms");
+
+// 1. Solve http://www.spoj.com/problems/PALIN/
+//define findPalindrome
+
+function findPalindrome(k){
+  if(k < 0){
+    console.log("Negative number is not valid");
+    return 0;
+  }
+  var text = k.toString();
+  length = text.length;
+  mid = length/2;
+  for(var i=0; i < mid; i++) {
+    if(text[i] != text[length-1-i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function findSmallestPalindrome(k) {
+  while(k++){
+    if (findPalindrome(k) === true) {
+      return k;
+    }
+  }
+}
+
+// test smallestPalidrome
+console.log(findSmallestPalindrome(808) === 818);
+console.log(findSmallestPalindrome(2133) === 2222);
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. Solve https://csacademy.com/contest/interview-archive/task/intersecting-rectangles/
+//    What is the runtime complexity of your solution?
+//    HINT: Try to break down the problems into smaller steps. For example,
+//          find a convenient way to represent rectangles and define a function
+//          that tests whether one rectangle is inside another. Then test your
+//          code on just two rectangles first to make sure it works.
+
+function Rectangle(arr) {
+  this.left = arr[0]
+  this.right = arr[1]
+  this.top = arr[2]
+  this.bottom = arr[3]
+}
+var checkIntersection = function(r1, r2) {
+  if (r1.left > r2.right || r1.right < r2.left || r1.bottom > r2.top || r1.top < r2.bottom) {
+    console.log("False: R1 is to the right or left or top or bottom or R2");
+    return false;
+  }
+  else{ 
+    console.log("True: Rectangles intersects eachother")
+    return true;
+  }
+};
+
+function checkRectangles(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = i+1; j < arr.length; j++) {
+      var r1 = new Rectangle(arr[i]);
+      var r2 = new Rectangle(arr[j]);
+      if (checkIntersection(r1, r2) === true) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+checkRectangles([[4, 5, 6, 16], [5, 7, 8, 10]]);
+checkRectangles([[11, 2, 6, 8], [5, 2, 9, 10]]);
+checkRectangles([[4, 5, 6, 8], [2, 6, 9, 3]]);
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
